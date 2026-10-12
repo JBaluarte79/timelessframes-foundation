@@ -4,7 +4,7 @@ function setSound(on){if(!aud)return;if(on){aud.volume=0;aud.play().then(()=>{le
 function enter(s){document.body.classList.remove('locked');intro.classList.add('go');document.body.classList.add('ready');setSound(s);setTimeout(()=>intro.remove(),2200)}
 if(intro){$('#enterSnd').onclick=()=>enter(true);$('#enterQ').onclick=()=>enter(false);if(sessionStorage.tffIn){enter(false)}sessionStorage.tffIn=1}else document.body.classList.add('ready');
 snd&&(snd.onclick=()=>setSound(aud.paused));
-const nav=$('#nav'),bg=$('#burger');bg&&(bg.onclick=()=>nav.classList.toggle('open'));nav&&nav.querySelectorAll('a').forEach(a=>a.onclick=()=>nav.classList.remove('open'));
+const nav=$('#nav'),bg=$('#burger');bg&&(bg.onclick=()=>{const o=nav.classList.toggle('open');document.documentElement.classList.toggle('menu-open',o);document.body.classList.toggle('menu-open',o);bg.setAttribute('aria-expanded',o)});nav&&nav.querySelectorAll('a').forEach(a=>a.onclick=()=>{nav.classList.remove('open');document.documentElement.classList.remove('menu-open');document.body.classList.remove('menu-open')});
 const top=$('.top');
 // reveal
 const io='IntersectionObserver' in window?new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);const v=e.target.querySelector('video.lazyv');if(v&&!v.src){v.src=v.dataset.src;v.play().catch(()=>{})}}}),{threshold:0,rootMargin:'0px 0px -8% 0px'}):null;

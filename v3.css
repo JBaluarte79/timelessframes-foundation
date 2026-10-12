@@ -183,3 +183,42 @@ html:not(.js-ok) .rv,html:not(.js-ok) .chap,html:not(.js-ok) .w{opacity:1!import
  .finale{min-height:0;padding:48px 0}
  .contact{gap:36px}
 }
+
+/* ---- display type fix (Oct 12 2026) ---- */
+.kicker{letter-spacing:.25em;line-height:1.3;margin-bottom:clamp(14px,1.6vw,20px)}
+.kicker+h1,.kicker+h2,.kicker+.giant,.kicker+.mega{margin-top:0}
+.giant,.mega,.hero h1,.chap h3{text-wrap:balance;letter-spacing:0;word-spacing:.04em;overflow-wrap:normal;hyphens:none}
+.giant{font-size:clamp(42px,8.5vw,104px);line-height:.98;margin-bottom:clamp(16px,2vw,24px)}
+.mega{font-size:clamp(50px,9.5vw,112px);line-height:1;margin:0 auto clamp(20px,2.4vw,32px);max-width:12ch}
+.mega span{display:inline}
+.mega em,.join h2 em{font:italic 400 1.12em/0 var(--f-s);letter-spacing:-.02em;vertical-align:baseline;padding-right:.04em}
+.hero h1{font-size:clamp(58px,10.5vw,152px);line-height:.96}
+.hero h1 .l2{font-size:.72em;line-height:1.1;margin-top:.04em}
+.chap h3{font-size:clamp(52px,7vw,112px);line-height:.98;margin:6px 0 16px}
+.dm-txt .giant{font-size:clamp(40px,5.6vw,88px)}
+.doc .giant{font-size:clamp(42px,7vw,96px);line-height:.98}
+.fin-in{max-width:1100px}
+.fin-in p:not(.kicker):not(.alt):not(.ein){background:#050f1fb8;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);padding:16px 22px;border-radius:10px;color:var(--cream);opacity:1}
+@media (max-width:980px){.chap h3{font-size:clamp(44px,12vw,64px)}}
+@media (max-width:520px){.giant{font-size:clamp(38px,11vw,52px)}.mega{font-size:clamp(46px,13.5vw,60px)}.hero h1{font-size:clamp(54px,15vw,68px)}.kicker{letter-spacing:.2em}}
+.m-words{font:200 clamp(21px,2.1vw,29px)/1.45 var(--f-s);letter-spacing:-.005em;max-width:34ch}
+.m-h{font-size:clamp(19px,1.8vw,26px);line-height:1.3;margin-bottom:clamp(14px,1.6vw,20px)}
+.lead{font-weight:200;font-size:clamp(19px,1.6vw,23px);line-height:1.5;max-width:40ch}
+.vision .giant{font-size:clamp(42px,7vw,100px)}
+.vision p{font-weight:200;font-size:clamp(18px,1.5vw,21px);line-height:1.55;max-width:60ch}
+.fin-in p:not(.kicker):not(.alt):not(.ein){font-size:clamp(16px,1.3vw,18px);line-height:1.55}
+@media (max-width:520px){.vision .giant{font-size:clamp(38px,11vw,52px)}}
+.join .mega{margin-left:0;max-width:none}
+/* mobile menu overlay */
+@media (max-width:980px){
+ .menu-open,.menu-open body{overflow:hidden;touch-action:none}
+ .menu-open .top{background:#0E1E4E!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+ .nav{position:fixed;inset:0;z-index:-1;background:#0E1E4E;height:100dvh;padding:96px 28px 48px;gap:clamp(14px,3.2vh,26px)}
+ .nav.open{display:flex}
+ .nav.open:before{content:"";position:absolute;left:28px;right:28px;top:76px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.6}
+ .nav a{font:400 clamp(30px,8.5vw,40px)/1.1 var(--f-d);letter-spacing:.04em;opacity:1}
+ .nav a:hover,.nav a:active{color:var(--gold2)}
+ .burger span{transition:.3s}
+ .menu-open .burger span:first-child{transform:translateY(4px) rotate(45deg)}
+ .menu-open .burger span:last-child{transform:translateY(-4px) rotate(-45deg)}
+}

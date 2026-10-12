@@ -118,3 +118,6 @@ section{padding:clamp(3.5rem,8vw,7rem) 0}.hero{padding:0}.story{padding:0}.reel{
 .page-hero{padding:clamp(7.5rem,16vw,11rem) 0 clamp(2.5rem,6vw,5rem)}
 @media (max-width:760px){.chapter{min-height:70svh}.story-steps{padding:10vh 0 15vh}}
 html:not(.js) .reveal{opacity:1;transform:none}
+@media (max-width:1080px){header.nav:has(#menu.open){backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:#0E1E4E!important}
+html:has(#menu.open),body:has(#menu.open){overflow:hidden}
+.nav ul.open{background:#0E1E4E;height:100dvh}.nav ul.open a{font-size:clamp(26px,7vw,34px)}}
