@@ -411,3 +411,4 @@ html,body{overflow-x:hidden}@supports (overflow:clip){html,body{overflow-x:clip}
 .pg-head{font-size:18px}.pg .snd{display:none}
 @media (max-width:760px){.pg-hero{height:auto;aspect-ratio:4/3}}
 @media (max-width:760px){.pg-card{flex-direction:column;gap:10px;padding:22px 20px}.pg-n{font-size:26px}}
+.globe-sec{padding-top:clamp(44px,6vw,88px);padding-bottom:clamp(20px,4vw,72px)}@media (max-width:760px){.globe-sec{padding:44px 24px 16px}.globe-wrap{margin-top:-8px}}
