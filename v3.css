@@ -222,3 +222,23 @@ html:not(.js-ok) .rv,html:not(.js-ok) .chap,html:not(.js-ok) .w{opacity:1!import
  .menu-open .burger span:first-child{transform:translateY(4px) rotate(45deg)}
  .menu-open .burger span:last-child{transform:translateY(-4px) rotate(-45deg)}
 }
+/* ---- hero + empty-space pass (Oct 12 2026 b) ---- */
+.hero-chips{display:none}
+@media (max-width:760px){
+ .hero{height:100svh;min-height:0}
+ .hero-v{transform-origin:50% 100%;transform:scale(1.42);animation:kbm 18s ease-out forwards;object-position:50% 100%}
+ @keyframes kbm{from{transform:scale(1.5)}to{transform:scale(1.4)}}
+ .hero-shade{background:linear-gradient(180deg,#050f1fcc 0%,#050f1f33 16%,transparent 40%,#050f1f66 62%,#050f1ff2 100%)}
+ .hero-chips{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;position:absolute;top:74px;left:14px;right:14px;z-index:2}
+ .hero-chips a{font:600 10.5px/1 var(--f-b);letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:var(--gold2);background:#050f1f8c;border:1px solid #b0a56870;border-radius:99px;padding:7px 10px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+ .hero-txt{bottom:max(28px,4svh);right:18px}
+ .hero-sub{margin:10px 0 16px}
+ .scrollcue{display:none}
+ .manifesto,.globe-sec,.join,.vision,.trans,.blog,.contact{padding-top:56px;padding-bottom:56px}
+ .rv-txt,.dm-txt{padding:40px 20px 48px}
+ .finale{padding:56px 0}
+ .artisans{padding:48px 0}
+ .doc{padding:96px 20px 56px}
+}
+@media (max-width:760px){.hero-v{transform:scale(1.28);animation:kbm2 18s ease-out forwards}@keyframes kbm2{from{transform:scale(1.36)}to{transform:scale(1.26)}}
+.hero-chips{flex-wrap:nowrap;gap:5px;left:10px;right:10px}.hero-chips a{font-size:9.5px;letter-spacing:.08em;padding:6px 8px;white-space:nowrap}}

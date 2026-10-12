@@ -121,3 +121,5 @@ html:not(.js) .reveal{opacity:1;transform:none}
 @media (max-width:1080px){header.nav:has(#menu.open){backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:#0E1E4E!important}
 html:has(#menu.open),body:has(#menu.open){overflow:hidden}
 .nav ul.open{background:#0E1E4E;height:100dvh}.nav ul.open a{font-size:clamp(26px,7vw,34px)}}
+@media (max-width:760px){section{padding:56px 0}.hero,.story,.reel{padding:0}.page-hero{padding:104px 0 40px}}
+@media (min-width:761px){section{padding:clamp(4rem,6vw,5.5rem) 0}.hero,.story,.reel{padding:0}.page-hero{padding:9rem 0 4rem}}
