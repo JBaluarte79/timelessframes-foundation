@@ -113,3 +113,8 @@ footer{background:var(--ink);color:rgba(255,255,255,.8);padding:4rem 0 calc(2rem
 .js .reveal{opacity:0;transform:translateY(40px);transition:opacity 1.1s var(--ease) var(--d,0s),transform 1.1s var(--ease) var(--d,0s)}.js .reveal.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.js .reveal,.fx,.title .ln>*{opacity:1!important;transform:none!important}.words .w{opacity:1}.letterbox{display:none}.grain{display:none}}
 .chapter p{text-shadow:0 2px 18px rgba(0,0,0,.9)}
+/* spacing fix */
+section{padding:clamp(3.5rem,8vw,7rem) 0}.hero{padding:0}.story{padding:0}.reel{padding:0}
+.page-hero{padding:clamp(7.5rem,16vw,11rem) 0 clamp(2.5rem,6vw,5rem)}
+@media (max-width:760px){.chapter{min-height:70svh}.story-steps{padding:10vh 0 15vh}}
+html:not(.js) .reveal{opacity:1;transform:none}

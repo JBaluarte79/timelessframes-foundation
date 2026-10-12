@@ -17,7 +17,7 @@ else{intro.querySelector('[data-enter=sound]').focus({preventScroll:true});$$('[
  if(x.dataset.enter==='sound')setSound(true);intro.classList.add('counting');const c=$('.count',intro),r=$('.ring',intro);let n=3,t0=performance.now();
  (function tick(t){const p=((t-t0)%700)/700;r.style.setProperty('--p',p*360+'deg');const k=3-Math.floor((t-t0)/700);if(k!==n&&k>0){n=k;c.textContent=k}if(t-t0<2100)requestAnimationFrame(tick);else enter()})(t0)}))}
 // reveal
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12,rootMargin:'0px 0px -5% 0px'});$$('.reveal').forEach(el=>io.observe(el));
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:0,rootMargin:'0px 0px -5% 0px'});$$('.reveal').forEach(el=>io.observe(el));
 // manifesto words
 const ws=$$('.words .w');const hero=$('.hero-v');
 // chapters

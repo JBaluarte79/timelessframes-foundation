@@ -1,4 +1,4 @@
-(()=>{const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+(()=>{document.documentElement.classList.add('js-ok');const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const aud=$('#aud'),snd=$('#snd'),intro=$('#intro');
 function setSound(on){if(!aud)return;if(on){aud.volume=0;aud.play().then(()=>{let v=0;const f=setInterval(()=>{v=Math.min(.55,v+.03);aud.volume=v;if(v>=.55)clearInterval(f)},80)}).catch(()=>{});snd&&snd.classList.add('on')}else{aud.pause();snd&&snd.classList.remove('on')}}
 function enter(s){document.body.classList.remove('locked');intro.classList.add('go');document.body.classList.add('ready');setSound(s);setTimeout(()=>intro.remove(),2200)}
@@ -7,15 +7,17 @@ snd&&(snd.onclick=()=>setSound(aud.paused));
 const nav=$('#nav'),bg=$('#burger');bg&&(bg.onclick=()=>nav.classList.toggle('open'));nav&&nav.querySelectorAll('a').forEach(a=>a.onclick=()=>nav.classList.remove('open'));
 const top=$('.top');
 // reveal
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');const v=e.target.querySelector('video.lazyv');if(v&&!v.src){v.src=v.dataset.src;v.play().catch(()=>{})}}}),{threshold:.2});
-$$('.revive,.dreams,.manifesto h2,.trans,.blog,.vision,.pillars .pill,.contact').forEach(el=>{if(!el.classList.contains('revive'))el.classList.add('rv');io.observe(el)});
+const io='IntersectionObserver' in window?new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);const v=e.target.querySelector('video.lazyv');if(v&&!v.src){v.src=v.dataset.src;v.play().catch(()=>{})}}}),{threshold:0,rootMargin:'0px 0px -8% 0px'}):null;
+$$('.revive,.dreams,.manifesto h2,.trans,.blog,.vision,.pillars .pill,.contact').forEach(el=>{if(!el.classList.contains('revive'))el.classList.add('rv');io?io.observe(el):el.classList.add('in')});
+const rvSafety=()=>$$('.rv:not(.in)').forEach(el=>{const r=el.getBoundingClientRect();if(r.top<innerHeight&&r.bottom>0)el.classList.add('in')});addEventListener('scroll',rvSafety,{passive:true});setTimeout(rvSafety,600);
+const mob=()=>innerWidth<=980;
 const words=$$('#words .w'),chs=$$('.chap'),chImgs=$$('.ch-media img'),chSec=$('.chapters'),art=$('.artisans'),track=$('#track'),fin=$('.fin-bg');
-function sizeArt(){if(!art||!track)return;art.style.height=(track.scrollWidth-innerWidth+innerHeight+200)+'px'}
+function sizeArt(){if(!art||!track)return;if(mob()){art.style.height='';track.style.transform='';return}art.style.height=(track.scrollWidth-innerWidth+innerHeight+200)+'px'}
 sizeArt();addEventListener('resize',sizeArt);addEventListener('load',sizeArt);
 let ticking=false;function onScroll(){ticking=false;const y=scrollY,h=innerHeight;top&&top.classList.toggle('solid',y>60);
- if(words.length){const r=$('#words').getBoundingClientRect();const p=Math.min(1,Math.max(0,(h*.85-r.top)/(r.height+h*.3)));const n=Math.floor(p*words.length);words.forEach((w,i)=>w.classList.toggle('on',i<n))}
+ if(words.length){const r=$('#words').getBoundingClientRect();const p=Math.min(1,Math.max(0,(h*.95-r.top)/(r.height*.7+1)));const n=Math.ceil(p*words.length);words.forEach((w,i)=>{if(i<n)w.classList.add('on')})}
  if(chSec){const r=chSec.getBoundingClientRect();const p=Math.min(.999,Math.max(0,-r.top/(r.height-h)));const i=Math.floor(p*chs.length);chs.forEach((c,j)=>c.classList.toggle('on',j===i));chImgs.forEach((c,j)=>c.classList.toggle('on',j<=i));$('#chbar').style.width=(p*100)+'%'}
- if(art&&track){const r=art.getBoundingClientRect();const max=track.scrollWidth-innerWidth;const p=Math.min(1,Math.max(0,-r.top/(r.height-h)));track.style.transform=`translate3d(${-p*max}px,0,0)`}
+ if(art&&track&&!mob()){const r=art.getBoundingClientRect();const max=track.scrollWidth-innerWidth;const p=Math.min(1,Math.max(0,-r.top/(r.height-h)));track.style.transform=`translate3d(${-p*max}px,0,0)`}
  if(fin){const r=fin.parentNode.getBoundingClientRect();const p=Math.min(1,Math.max(0,1-(r.top+r.height)/(h+r.height)));fin.style.transform=`scale(${1.25-p*.25})`}}
 addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(onScroll)}},{passive:true});onScroll();
 // globe
