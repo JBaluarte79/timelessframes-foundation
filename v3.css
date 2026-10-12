@@ -274,3 +274,19 @@ html:not(.js-ok) .rv,html:not(.js-ok) .chap,html:not(.js-ok) .w{opacity:1!import
  .st-x{position:fixed;top:max(12px,env(safe-area-inset-top))}
  .st-nav{position:sticky;bottom:0;background:#0E1E4E;padding-bottom:6px}
 }
+/* ---- pillars + Dreams spotlight ---- */
+.pillars{grid-template-columns:repeat(4,1fr)}
+@media (max-width:980px){.pillars{grid-template-columns:1fr 1fr}.pill:nth-child(2n){border-right:0}}
+@media (max-width:520px){.pillars{grid-template-columns:1fr}}
+.spot{position:relative;min-height:min(92svh,860px);display:flex;align-items:flex-end;overflow:hidden;background:var(--ink)}
+.spot-media{position:absolute;inset:0}.spot-media img{width:100%;height:100%;object-fit:cover;object-position:50% 40%}
+.spot:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#050f1fee 0%,#050f1fb3 38%,#050f1f22 70%),linear-gradient(0deg,#050f1fcc,transparent 45%);pointer-events:none}
+.spot .tag-ill{z-index:2;left:auto;right:12px}
+.spot-txt{position:relative;z-index:2;max-width:640px;padding:clamp(56px,7vw,110px) clamp(20px,5vw,80px);display:flex;flex-direction:column;gap:18px}
+.spot-tag{align-self:flex-start;font:600 11px/1 var(--f-b);letter-spacing:.2em;text-transform:uppercase;background:var(--gold);color:var(--ink);padding:8px 12px;border-radius:99px}
+.spot .giant em{font:italic 400 1.02em/1 var(--f-s);text-transform:none;color:var(--gold2)}
+.spot-txt p{font:300 clamp(18px,1.6vw,22px)/1.55 var(--f-s);color:var(--cream)}
+@media (max-width:760px){.spot{display:block;min-height:0}.spot-media{position:relative;height:56svh}.spot:after{background:linear-gradient(0deg,#050f1f 0%,#050f1f00 55%);height:56svh}
+ .spot-txt{margin-top:-90px;padding:0 20px 56px;gap:14px}.spot-txt .hero-cta .btn{flex:1 1 auto;justify-content:center}}
+.spot-txt{max-width:780px}.spot .giant{font-size:clamp(42px,6vw,92px)}.spot .tag-ill{top:12px;bottom:auto}
+@media (max-width:760px){.spot .tag-ill{top:auto;bottom:auto;top:calc(56svh - 130px)}.spot .tag-ill{top:70px}}
