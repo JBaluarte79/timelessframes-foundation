@@ -242,3 +242,35 @@ html:not(.js-ok) .rv,html:not(.js-ok) .chap,html:not(.js-ok) .w{opacity:1!import
 }
 @media (max-width:760px){.hero-v{transform:scale(1.28);animation:kbm2 18s ease-out forwards}@keyframes kbm2{from{transform:scale(1.36)}to{transform:scale(1.26)}}
 .hero-chips{flex-wrap:nowrap;gap:5px;left:10px;right:10px}.hero-chips a{font-size:9.5px;letter-spacing:.08em;padding:6px 8px;white-space:nowrap}}
+/* ---- interactive globe + story sheet ---- */
+.globe-sec{gap:clamp(20px,4vw,64px)}
+.globe-wrap{position:relative;width:100%;max-width:640px;margin:auto;aspect-ratio:1}.globe-wrap canvas{width:100%;height:100%;cursor:grab}
+.ghint{font:italic 300 clamp(16px,1.4vw,19px) var(--f-s);color:var(--gold2);margin:4px 0 14px;display:flex;align-items:center;gap:10px}.ghint:before{content:"";width:10px;height:10px;border-radius:50%;background:var(--gold2);box-shadow:0 0 0 0 #d9cf8f99;animation:ping 1.8s infinite}
+@keyframes ping{to{box-shadow:0 0 0 14px #d9cf8f00}}
+#glist{columns:auto;display:flex;flex-wrap:wrap;gap:10px;margin:0 0 18px}#glist li:before{content:none}
+#glist button{font:400 18px/1 var(--f-d);letter-spacing:.06em;text-transform:uppercase;color:var(--cream);background:#0E1E4E;border:1px solid #b0a56877;border-radius:99px;padding:12px 18px;cursor:pointer;transition:.3s}
+#glist li.on button,#glist button:hover{background:var(--gold);color:var(--ink);border-color:var(--gold)}
+.globe-txt .note{font-size:12px;opacity:.5}
+.story{position:fixed;inset:0;z-index:300;background:#050f1fcc;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:grid;place-items:center;padding:24px;opacity:0;transition:opacity .35s}
+.story.show{opacity:1}.story[hidden]{display:none}
+.story-open,.story-open body{overflow:hidden}
+.st-card{position:relative;display:grid;grid-template-columns:1fr 1.05fr;width:min(1080px,100%);max-height:min(88svh,760px);background:#0E1E4E;border:1px solid #b0a56877;border-radius:16px;overflow:hidden;box-shadow:0 40px 120px #000c;transform:translateY(24px) scale(.98);transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+.story.show .st-card{transform:none}.st-card.swap .st-body>*{animation:stin .5s both}.st-card.swap .st-img img{animation:stimg .7s both}
+@keyframes stin{from{opacity:0;transform:translateY(10px)}}@keyframes stimg{from{opacity:0;transform:scale(1.06)}}
+.st-img{position:relative;margin:0;min-height:100%}.st-img img{width:100%;height:100%;object-fit:cover}
+.st-ill{position:absolute;left:10px;bottom:10px;font-size:9px;letter-spacing:.18em;text-transform:uppercase;opacity:.55;background:#050f1f88;padding:3px 6px;border-radius:3px}
+.st-body{overflow:auto;padding:clamp(24px,3.4vw,44px);display:flex;flex-direction:column;gap:10px}
+.st-craft{font:400 clamp(34px,3.6vw,52px)/1 var(--f-d);text-transform:uppercase;text-wrap:balance}
+.st-real{align-self:flex-start;font:600 11px/1 var(--f-b);letter-spacing:.14em;text-transform:uppercase;background:var(--gold);color:var(--ink);padding:6px 10px;border-radius:99px}
+.st-body p:not(.kicker){font:300 16.5px/1.6 var(--f-s);opacity:.92}.st-body h4{font:600 11px var(--f-b);letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-top:8px}
+.st-act{margin-top:10px}.st-nav{display:flex;justify-content:space-between;align-items:center;border-top:1px solid #b0a56844;padding-top:14px;margin-top:8px}
+.st-nav button{background:none;border:0;color:var(--cream);font:600 13px var(--f-b);letter-spacing:.08em;cursor:pointer;padding:10px 4px}.st-nav button:hover{color:var(--gold2)}.st-n{font:600 12px var(--f-b);opacity:.6}
+.st-x{position:absolute;top:12px;right:12px;z-index:3;width:42px;height:42px;border-radius:50%;border:1px solid #b0a56888;background:#0E1E4Ecc;color:var(--cream);font-size:26px;line-height:1;cursor:pointer}
+@media (max-width:760px){
+ .globe-sec{padding:48px 18px 40px;gap:8px}.globe-wrap{max-width:none;width:calc(100% + 24px);margin:0 -12px}
+ .globe-txt{order:-1}.globe-txt h2{margin-bottom:6px}#glist{gap:8px}#glist button{font-size:15px;padding:10px 14px}
+ .story{padding:0;background:#0E1E4E}.st-card{display:block;width:100%;height:100%;max-height:none;border:0;border-radius:0;overflow:auto;-webkit-overflow-scrolling:touch}
+ .st-img{height:44svh;min-height:0}.st-body{overflow:visible;padding:22px 20px calc(28px + env(safe-area-inset-bottom))}
+ .st-x{position:fixed;top:max(12px,env(safe-area-inset-top))}
+ .st-nav{position:sticky;bottom:0;background:#0E1E4E;padding-bottom:6px}
+}
