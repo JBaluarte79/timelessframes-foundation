@@ -44,4 +44,4 @@ const th=$('#thanks');if(th&&new URLSearchParams(location.search).get('thanks')=
 
 (()=>{if(!matchMedia('(max-width:760px)').matches)return;const v=document.querySelector('.hero-v');if(v){v.pause();v.querySelectorAll('source').forEach(s=>s.remove());v.remove()}})();
 
-(()=>{const im=[...document.querySelectorAll('.dr-fade img')];if(im.length<2||matchMedia('(prefers-reduced-motion:reduce)').matches)return;let i=0;setInterval(()=>{im[i].classList.remove('on');i=(i+1)%im.length;im[i].classList.add('on')},5000)})();
+(()=>{const im=[...document.querySelectorAll(".dr-fade img")];if(im.length<2||matchMedia('(prefers-reduced-motion:reduce)').matches)return;let i=0;setInterval(()=>{im[i].classList.remove('on');i=(i+1)%im.length;im[i].classList.add('on')},5000)})();
