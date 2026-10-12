@@ -374,3 +374,7 @@ html,body{overflow-x:hidden}@supports (overflow:clip){html,body{overflow-x:clip}
 .dr-fade img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 25%;opacity:0;transition:opacity 2s ease;filter:brightness(1.12) saturate(1.1)}
 .dr-fade img.on{opacity:1}
 @media (max-width:760px){.dr-fade{height:62svh}}
+/* story card full-bleed + hidden scrollbar */
+.st-card,.st-body,.story{scrollbar-width:none;-ms-overflow-style:none}.st-card::-webkit-scrollbar,.st-body::-webkit-scrollbar,.story::-webkit-scrollbar{display:none;width:0}
+.st-img{width:100%;overflow:hidden}.st-img img{display:block;width:100%;height:100%;object-fit:cover}
+@media (max-width:760px){.st-card{width:100vw;max-width:100vw}.st-img{width:100%;margin:0}.st-x{right:12px;background:#050f1fa6;backdrop-filter:blur(6px)}}
