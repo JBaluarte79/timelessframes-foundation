@@ -41,3 +41,5 @@ const cv=$('#globe');if(cv&&window.PTS){const ctx=cv.getContext('2d'),W=cv.width
 // thank-you overlay (?thanks=1)
 const th=$('#thanks');if(th&&new URLSearchParams(location.search).get('thanks')==='1'){th.hidden=false;document.body.classList.add('thanks-open');const cl=$('#thanksClose');const go=()=>{th.hidden=true;document.body.classList.remove('thanks-open');try{history.replaceState(null,'',location.pathname+location.hash)}catch(e){}};cl&&(cl.onclick=go);th.onclick=e=>{if(e.target===th)go()}}
 })();
+
+(()=>{if(!matchMedia('(max-width:760px)').matches)return;const v=document.querySelector('.hero-v');if(v){v.pause();v.querySelectorAll('source').forEach(s=>s.remove());v.remove()}})();

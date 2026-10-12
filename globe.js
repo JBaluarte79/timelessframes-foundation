@@ -6,15 +6,15 @@ function proj(la,lo){const l=rad(lo+rot),p=rad(la),t=rad(tilt);let x=Math.cos(p)
 // coarse land dots from a tiny continent mask (lat,lon boxes) for texture
 const LAND=[[-55,-35,-75,-35],[-35,12,-82,-34],[12,30,-118,-80],[30,70,-168,-55],[60,83,-75,-15],[35,71,-10,40],[-35,37,-18,51],[5,77,40,180],[-45,-10,112,155],[30,46,128,146]];
 const DOTS=[];for(let la=-60;la<=78;la+=3.2)for(let lo=-180;lo<180;lo+=3.2/Math.max(.3,Math.cos(rad(la))))if(LAND.some(b=>la>=b[0]&&la<=b[1]&&lo>=b[2]&&lo<=b[3]))DOTS.push([la,lo]);
-S.forEach((s,i)=>{const li=document.createElement('li');const b=document.createElement('button');b.type='button';b.textContent=lab(s);b.onclick=()=>openS(i);b.onmouseenter=()=>{hover=i;focus(i)};li.appendChild(b);list.appendChild(li)});
+S.forEach((s,i)=>{const li=document.createElement('li');const b=document.createElement('button');b.type='button';b.textContent=lab(s);b.onclick=()=>openS(i);b.onmouseenter=()=>{hover=i;userT=0;focus(i)};li.appendChild(b);list.appendChild(li)});
 function focus(i){target=-S[i].lo}
 new IntersectionObserver(e=>vis=e[0].isIntersecting).observe(cv);
 function pinAt(px,py){const r=cv.getBoundingClientRect(),x=(px-r.left)*W/r.width,y=(py-r.top)*W/r.height;let best=-1,bd=1e9;S.forEach((s,i)=>{const[a,b,z]=proj(s.la,s.lo);if(z<0)return;const d=Math.hypot(a-x,b-y);if(d<bd){bd=d;best=i}});return bd<W*.075?best:-1}
-cv.addEventListener('pointerdown',e=>{drag={x:e.clientX,y:e.clientY,r:rot,t:tilt};moved=0;target=null;cv.setPointerCapture(e.pointerId)});
+cv.addEventListener('pointerdown',e=>{userT=0;drag={x:e.clientX,y:e.clientY,r:rot,t:tilt};moved=0;target=null;cv.setPointerCapture(e.pointerId)});
 cv.addEventListener('pointermove',e=>{if(drag){const dx=e.clientX-drag.x,dy=e.clientY-drag.y;moved=Math.max(moved,Math.hypot(dx,dy));rot=drag.r+dx*.45;tilt=Math.max(-40,Math.min(30,drag.t+dy*.2));idle=0}else{const p=pinAt(e.clientX,e.clientY);hover=p;cv.style.cursor=p>=0?'pointer':'grab'}});
 cv.addEventListener('pointerup',e=>{const was=drag;drag=null;if(was&&moved<8){const p=pinAt(e.clientX,e.clientY);if(p>=0)openS(p)}});
 cv.style.touchAction='pan-y';
-function draw(){requestAnimationFrame(draw);if(!vis)return;tk++;idle++;
+let auto=0,userT=0;function draw(){requestAnimationFrame(draw);if(!vis)return;tk++;idle++;userT++;if(userT>240&&act<0&&!drag&&tk%200===0){auto=(auto+1)%S.length;hover=auto;focus(auto)}
  if(target!==null){let d=((target-rot+540)%360)-180;rot+=d*.08;if(Math.abs(d)<.2)target=null}else if(!drag&&idle>90)rot+=.12;
  ctx.clearRect(0,0,W,W);
  const halo=ctx.createRadialGradient(C,C,R*.9,C,C,R*1.18);halo.addColorStop(0,'#d9cf8f33');halo.addColorStop(1,'#d9cf8f00');ctx.fillStyle=halo;ctx.beginPath();ctx.arc(C,C,R*1.18,0,7);ctx.fill();

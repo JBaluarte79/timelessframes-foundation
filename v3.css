@@ -362,3 +362,8 @@ html,body{overflow-x:hidden}@supports (overflow:clip){html,body{overflow-x:clip}
 .art-head>.kicker{grid-column:1/-1;margin-bottom:-8px}
 @media (max-width:760px){.hero-seq img{animation:hseq2 10s infinite}.hero-seq img:nth-child(2){animation-delay:5s}
 @keyframes hseq2{0%{opacity:0;transform:scale(1.06)}8%{opacity:1}50%{opacity:1}58%{opacity:0;transform:scale(1)}100%{opacity:0}}}
+/* merged artisans + globe */
+.globe-txt .giant{font-size:clamp(40px,5.4vw,88px);margin-bottom:14px}
+.g-intro p{font:300 clamp(17px,1.4vw,20px)/1.55 var(--f-s);opacity:.92;max-width:44ch;margin-bottom:16px}
+.g-cta{margin:4px 0 14px;white-space:normal}
+@media (max-width:760px){.globe-sec{padding:56px 24px 40px}.globe-txt .giant{font-size:clamp(38px,11vw,52px)}}
