@@ -367,3 +367,5 @@ html,body{overflow-x:hidden}@supports (overflow:clip){html,body{overflow-x:clip}
 .g-intro p{font:300 clamp(17px,1.4vw,20px)/1.55 var(--f-s);opacity:.92;max-width:44ch;margin-bottom:16px}
 .g-cta{margin:4px 0 14px;white-space:normal}
 @media (max-width:760px){.globe-sec{padding:56px 24px 40px}.globe-txt .giant{font-size:clamp(38px,11vw,52px)}}
+@media (max-width:760px){.hero-seq img{opacity:1!important;object-position:50% 20%;animation:hkb 20s ease-out forwards!important}@keyframes hkb{from{transform:scale(1.08)}to{transform:scale(1)}}
+.hero-shade{background:linear-gradient(180deg,#050f1f99 0%,transparent 14%,transparent 40%,#050f1fcc 62%,#050f1ff5 100%)}}
