@@ -208,7 +208,7 @@ dialog#apply::backdrop{background:rgba(6,12,24,.82);backdrop-filter:blur(4px)}
   <div class="eyebrow">By application only &middot; Bora Kids Christmas 2026</div>
   <h1>Not a luxury vacation.<br><span class="gt">A luxury invitation.</span></h1>
   <p class="lead">Nine days in the heart of the Peruvian Amazon. Bring Christmas to the children of the Momón River, then help change their lives forever with development that stays, run by the communities themselves.</p>
-  <div class="ctas"><a class="btn" href="#invitation">Apply for an invitation</a><a class="btn ghost" href="#films">Watch the films</a></div>
+  <div class="ctas"><a class="btn" href="#invitation">Apply for an invitation</a><a class="btn ghost" href="#films">Watch the films</a></div><div><button type="button" class="pcbtn" onclick="document.getElementById('pcall').showModal()">Request a private call with the President</button></div><div class="pcthanks">Thank you. Pepe&rsquo;s office will confirm your time within 24 hours.</div>
   <div class="date"><span>December 12&ndash;20, 2026</span><span>Lima &middot; Iquitos &middot; Momón River</span></div>
  </div>
 </section>
@@ -418,7 +418,7 @@ window.addEventListener('load',function(){
    <li><b>02</b><h4>A private conversation with Jose</h4><p>Ask anything. Hear the story behind the foundation. No obligation.</p></li>
    <li><b>03</b><h4>Your invitation</h4><p>If it is the right fit for you and for the communities, your numbered invitation is reserved.</p></li>
   </ol>
-  <div class="center" style="text-align:center"><button type="button" class="btn" onclick="document.getElementById('apply').showModal()">Apply for an invitation</button></div>
+  <div class="center" style="text-align:center"><button type="button" class="btn" onclick="document.getElementById('apply').showModal()">Apply for an invitation</button> <button type="button" class="pcbtn" onclick="document.getElementById('pcall').showModal()">Request a private call with the President</button></div><div class="pcthanks" id="pcthanks-end">Thank you. Pepe&rsquo;s office will confirm your time within 24 hours.</div>
   <p class="fine center" style="text-align:center">We select guests carefully to protect the communities we visit. Only 10 invitations. Twenty people.</p>
  </div>
  <div class="contact">
@@ -452,4 +452,36 @@ document.querySelectorAll('.ytlink').forEach(a=>a.addEventListener('click',()=>{
 <div style="text-align:center;margin-top:34px"><button class="btn" type="submit">Submit application</button></div>
 <p class="fine" style="text-align:center">Your details go only to Jose Baluarte at The Timeless Frames Foundation.</p>
 </form></dialog>
+
+<style>
+.pcbtn{background:transparent;color:var(--g1);border:1px solid var(--g2);border-radius:50px;padding:16px 30px;font:600 13px "Helvetica Neue",Arial,sans-serif;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;margin:8px;transition:.3s}.pcbtn:hover{background:rgba(236,208,150,.1);box-shadow:0 0 28px rgba(236,208,150,.3)}
+#pcall{border:1px solid var(--line);border-radius:14px;background:linear-gradient(180deg,rgb(19,35,64),rgb(10,19,36));color:var(--ink);padding:0;max-width:640px;width:calc(100% - 28px);max-height:92vh}
+#pcall::backdrop{background:rgba(3,7,15,.78);backdrop-filter:blur(6px)}
+#pcall form{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:36px 32px 30px;margin:0;max-width:none;text-align:left}
+#pcall h2{font-family:"Cormorant Garamond",Georgia,serif;font-size:40px;margin:0;grid-column:1/-1;line-height:1.05}
+#pcall .sub{grid-column:1/-1;font-size:15px;color:var(--mute);margin:0 0 6px}
+#pcall label{font:500 12px "Helvetica Neue",Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--g1);display:flex;flex-direction:column;gap:7px}
+#pcall input,#pcall select,#pcall textarea{font:16px "Helvetica Neue",Arial,sans-serif;background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--ink);padding:12px 14px;border-radius:4px;color-scheme:dark}
+#pcall select option{color:#000}#pcall textarea{min-height:90px}#pcall .f{grid-column:1/-1}
+#pcall .go{grid-column:1/-1;justify-self:center;background:var(--gold);color:rgb(14,27,51);border:0;border-radius:50px;padding:16px 36px;font:700 13px "Helvetica Neue",Arial,sans-serif;letter-spacing:.16em;text-transform:uppercase;cursor:pointer}
+#pcall .x{position:absolute;top:12px;right:16px;background:none;border:0;color:var(--g1);font-size:30px;cursor:pointer}
+.pcthanks{display:none;max-width:680px;margin:20px auto;border:1px solid var(--line);border-radius:10px;padding:18px 22px;text-align:center;color:var(--ink);background:rgba(236,208,150,.08);font-size:17px}
+@media(max-width:600px){#pcall form{grid-template-columns:1fr;padding:30px 20px 24px}#pcall h2{font-size:32px}}
+</style>
+<dialog id="pcall"><form action="https://formsubmit.co/0f342d1ce72268373a633e2b22ea9192" method="POST">
+<button type="button" class="x" aria-label="Close" onclick="this.closest('dialog').close()">&times;</button>
+<input type="hidden" name="_subject" value="President call request (Invitation)"><input type="hidden" name="_captcha" value="true"><input type="hidden" name="_template" value="table"><input type="hidden" name="_next" value="https://www.thetimelessframesfoundation.org/invitation/?call=1"><input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+<h2>A private call with <span class="gt">the President</span></h2>
+<p class="sub">Jose Baluarte, President of The Timeless Frames Foundation, makes time for a personal conversation. Choose what suits you; Pepe&rsquo;s office will confirm.</p>
+<label>Full name<input name="Full name" required autocomplete="name"></label>
+<label>Email<input type="email" name="email" required autocomplete="email"></label>
+<label>Phone (optional)<input type="tel" name="Phone" autocomplete="tel"></label>
+<label>Preferred date<input type="date" name="Preferred date" required></label>
+<label>Time window (Eastern Time)<select name="Preferred time window"><option>Morning (ET)</option><option>Afternoon (ET)</option><option>Evening (ET)</option></select></label>
+<label>Format<select name="Preferred format"><option>Phone</option><option>Video</option><option>In person in Tampa Bay</option></select></label>
+<label class="f">Message (optional)<textarea name="Message"></textarea></label>
+<button class="go" type="submit">Request the call</button>
+</form></dialog>
+<script>(function(){var d=document.querySelector('#pcall input[type=date]');if(d){var t=new Date();t.setDate(t.getDate()+1);d.min=t.toISOString().slice(0,10);}
+if(/[?&]call=1/.test(location.search)){document.querySelectorAll('.pcthanks').forEach(function(e){e.style.display='block'});var f=document.querySelector('.pcthanks:last-of-type');setTimeout(function(){var e=document.getElementById('pcthanks-end');if(e)e.scrollIntoView({block:'center'})},400);}})();</script>
 </body></html>

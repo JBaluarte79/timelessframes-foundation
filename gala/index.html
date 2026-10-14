@@ -63,7 +63,7 @@ footer{padding:60px 6vw;text-align:center;font-size:13px;color:#9aa3b3;border-to
  <h1>The Timeless <span class="gt">Frames Gala</span></h1>
  <p class="lead">A black-tie evening in Tampa for the children of the Momón River. One night, one room, one promise: to change their lives forever.</p>
  <div class="facts"><span>Proposed: Saturday, Feb 27, 2027 &middot; Date to be announced</span><span>Proposed venue: The Tampa EDITION</span><span>Black tie</span></div>
- <a class="btn" href="#request">Request your invitation</a>
+ <a class="btn" href="#request">Request your invitation</a><br><button type="button" class="pcbtn" onclick="document.getElementById('pcall').showModal()">Request a private call with the President</button><div class="pcthanks">Thank you. Pepe&rsquo;s office will confirm your time within 24 hours.</div>
 </div></section>
 
 <section id="story"><div class="wrap split">
@@ -134,6 +134,7 @@ footer{padding:60px 6vw;text-align:center;font-size:13px;color:#9aa3b3;border-to
   <label class="full">Anything we should know?<textarea name="Message"></textarea></label>
   <button class="btn full" type="submit">Request your invitation</button>
  </form>
+ <div style="margin-top:30px"><button type="button" class="pcbtn" onclick="document.getElementById('pcall').showModal()">Request a private call with the President</button></div><div class="pcthanks" id="pcthanks-end">Thank you. Pepe&rsquo;s office will confirm your time within 24 hours.</div>
 </div></section>
 
 <footer><img src="../assets/logo-160.png" alt="The Timeless Frames Foundation"><br>The Timeless Frames Foundation &middot; 501(c)(3) nonprofit &middot; Tampa, Florida</footer>
@@ -142,4 +143,36 @@ if(/[?&]thanks=1/.test(location.search)){var t=document.getElementById('thanks')
 var io='IntersectionObserver' in window?new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add('on');io.unobserve(x.target)}})},{threshold:.15}):null;
 document.querySelectorAll('.rv').forEach(function(el){io?io.observe(el):el.classList.add('on')});
 </script>
+
+<style>
+.pcbtn{background:transparent;color:var(--g1);border:1px solid var(--g2);border-radius:50px;padding:16px 30px;font:600 13px "Helvetica Neue",Arial,sans-serif;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;margin:8px;transition:.3s}.pcbtn:hover{background:rgba(236,208,150,.1);box-shadow:0 0 28px rgba(236,208,150,.3)}
+#pcall{border:1px solid var(--line);border-radius:14px;background:linear-gradient(180deg,rgb(19,35,64),rgb(10,19,36));color:var(--ink);padding:0;max-width:640px;width:calc(100% - 28px);max-height:92vh}
+#pcall::backdrop{background:rgba(3,7,15,.78);backdrop-filter:blur(6px)}
+#pcall form{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:36px 32px 30px;margin:0;max-width:none;text-align:left}
+#pcall h2{font-family:"Cormorant Garamond",Georgia,serif;font-size:40px;margin:0;grid-column:1/-1;line-height:1.05}
+#pcall .sub{grid-column:1/-1;font-size:15px;color:var(--mute);margin:0 0 6px}
+#pcall label{font:500 12px "Helvetica Neue",Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--g1);display:flex;flex-direction:column;gap:7px}
+#pcall input,#pcall select,#pcall textarea{font:16px "Helvetica Neue",Arial,sans-serif;background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--ink);padding:12px 14px;border-radius:4px;color-scheme:dark}
+#pcall select option{color:#000}#pcall textarea{min-height:90px}#pcall .f{grid-column:1/-1}
+#pcall .go{grid-column:1/-1;justify-self:center;background:var(--gold);color:rgb(14,27,51);border:0;border-radius:50px;padding:16px 36px;font:700 13px "Helvetica Neue",Arial,sans-serif;letter-spacing:.16em;text-transform:uppercase;cursor:pointer}
+#pcall .x{position:absolute;top:12px;right:16px;background:none;border:0;color:var(--g1);font-size:30px;cursor:pointer}
+.pcthanks{display:none;max-width:680px;margin:20px auto;border:1px solid var(--line);border-radius:10px;padding:18px 22px;text-align:center;color:var(--ink);background:rgba(236,208,150,.08);font-size:17px}
+@media(max-width:600px){#pcall form{grid-template-columns:1fr;padding:30px 20px 24px}#pcall h2{font-size:32px}}
+</style>
+<dialog id="pcall"><form action="https://formsubmit.co/0f342d1ce72268373a633e2b22ea9192" method="POST">
+<button type="button" class="x" aria-label="Close" onclick="this.closest('dialog').close()">&times;</button>
+<input type="hidden" name="_subject" value="President call request (Gala)"><input type="hidden" name="_captcha" value="true"><input type="hidden" name="_template" value="table"><input type="hidden" name="_next" value="https://www.thetimelessframesfoundation.org/gala/?call=1"><input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+<h2>A private call with <span class="gt">the President</span></h2>
+<p class="sub">Jose Baluarte, President of The Timeless Frames Foundation, makes time for a personal conversation. Choose what suits you; Pepe&rsquo;s office will confirm.</p>
+<label>Full name<input name="Full name" required autocomplete="name"></label>
+<label>Email<input type="email" name="email" required autocomplete="email"></label>
+<label>Phone (optional)<input type="tel" name="Phone" autocomplete="tel"></label>
+<label>Preferred date<input type="date" name="Preferred date" required></label>
+<label>Time window (Eastern Time)<select name="Preferred time window"><option>Morning (ET)</option><option>Afternoon (ET)</option><option>Evening (ET)</option></select></label>
+<label>Format<select name="Preferred format"><option>Phone</option><option>Video</option><option>In person in Tampa Bay</option></select></label>
+<label class="f">Message (optional)<textarea name="Message"></textarea></label>
+<button class="go" type="submit">Request the call</button>
+</form></dialog>
+<script>(function(){var d=document.querySelector('#pcall input[type=date]');if(d){var t=new Date();t.setDate(t.getDate()+1);d.min=t.toISOString().slice(0,10);}
+if(/[?&]call=1/.test(location.search)){document.querySelectorAll('.pcthanks').forEach(function(e){e.style.display='block'});var f=document.querySelector('.pcthanks:last-of-type');setTimeout(function(){var e=document.getElementById('pcthanks-end');if(e)e.scrollIntoView({block:'center'})},400);}})();</script>
 </body></html>
