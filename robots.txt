@@ -2,5 +2,6 @@ User-agent: *
 Allow: /
 Disallow: /posts/
 Disallow: /invitation/
+Disallow: /gala/
 
 Sitemap: https://thetimelessframesfoundation.org/sitemap.xml
