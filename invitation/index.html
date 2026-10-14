@@ -260,6 +260,93 @@ dialog#apply::backdrop{background:rgba(6,12,24,.82);backdrop-filter:blur(4px)}
  <p class="fine">Itinerary subject to river conditions, flight schedules and coordination with community leaders.</p>
 </div></section>
 
+<section id="journey"><div class="wrap">
+ <div class="eyebrow">The journey, mapped</div><h2>From Miami to the <span class="gt">Momón, and home</span></h2><div class="rule"></div>
+ <p class="jlead">Press play to fly the route, or tap any day.</p>
+ <div class="jmap"><div id="jm" aria-label="Interactive map of the itinerary"></div>
+  <div class="jcard" id="jcard" hidden><div class="jci" id="jci"></div><div class="jct"><div class="jcd" id="jcd"></div><h3 id="jch"></h3><p id="jcp"></p></div></div>
+  <button class="jplay" id="jplay" type="button">&#9654; Fly the journey</button>
+  <noscript><p class="jfb">Enable JavaScript to view the interactive map.</p></noscript>
+ </div>
+ <div class="jtl" id="jtl" role="tablist"></div>
+ <p class="fine">Routes and locations are representative. Itinerary subject to river conditions, flight schedules and coordination with community leaders. Items marked proposed are still being refined.</p>
+</div></section>
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.6.0/dist/maplibre-gl.css">
+<style>
+#journey{background:radial-gradient(ellipse at 50% 0%,rgba(40,66,112,.45),transparent 70%),var(--navy)}
+#journey .jlead{color:var(--mute);margin:0 0 18px}
+.jmap{position:relative;height:620px;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:radial-gradient(circle at 50% 40%,#13284a,#050b16 75%);box-shadow:0 0 60px rgba(176,136,72,.12) inset}
+#jm{position:absolute;inset:0}
+.jfb{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--mute);padding:20px;text-align:center}
+.jcard{position:absolute;left:18px;bottom:18px;width:340px;max-width:calc(100% - 36px);background:rgba(14,27,51,.55);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:16px;overflow:hidden;color:var(--ink);box-shadow:0 10px 40px rgba(0,0,0,.5);animation:jin .5s ease}
+@keyframes jin{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.jci{height:130px;background-size:cover;background-position:center}
+.jct{padding:14px 18px 16px}.jcd{font:600 11px "Helvetica Neue",Arial,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:var(--g1)}
+.jct h3{font-family:"Cormorant Garamond",serif;font-size:24px;margin:4px 0 6px;color:var(--ink)}.jct p{font-size:14px;line-height:1.5;margin:0;color:var(--mute)}
+.jplay{position:absolute;top:16px;right:16px;z-index:3;background:var(--gold);color:var(--navy);border:0;border-radius:40px;padding:11px 20px;font:700 12px "Helvetica Neue",Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;box-shadow:0 0 24px rgba(236,208,150,.45)}
+.jtl{display:flex;gap:8px;overflow-x:auto;padding:16px 2px 6px;scrollbar-width:thin}
+.jtl button{flex:0 0 auto;background:rgba(255,255,255,.04);border:1px solid var(--line);color:var(--mute);border-radius:12px;padding:9px 14px;cursor:pointer;text-align:left;font:12px "Helvetica Neue",Arial,sans-serif;transition:.3s}
+.jtl button b{display:block;color:var(--g1);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+.jtl button.on{background:rgba(236,208,150,.14);color:var(--ink);box-shadow:0 0 18px rgba(236,208,150,.3)}
+.jmk{width:16px;height:16px;border-radius:50%;background:var(--g1);box-shadow:0 0 0 0 rgba(236,208,150,.7);animation:jp 2s infinite;cursor:pointer;border:2px solid #fff8}
+.jmk.on{background:#fff;transform:scale(1.25)}
+@keyframes jp{0%{box-shadow:0 0 0 0 rgba(236,208,150,.7)}70%{box-shadow:0 0 0 16px rgba(236,208,150,0)}100%{box-shadow:0 0 0 0 rgba(236,208,150,0)}}
+.jmap .maplibregl-ctrl-attrib{background:rgba(0,0,0,.4)!important;font-size:10px}.jmap .maplibregl-ctrl-attrib a{color:#aaa}
+@media(max-width:700px){.jmap{height:560px}.jcard{left:10px;right:10px;bottom:10px;width:auto;background:rgba(14,27,51,.82)}.jci{height:70px}.jct h3{font-size:20px}.jct p{font-size:13px}.jplay{top:10px;right:10px;padding:9px 14px;font-size:11px}}
+</style>
+<script src="https://unpkg.com/maplibre-gl@5.6.0/dist/maplibre-gl.js" defer></script>
+<script defer>
+window.addEventListener('load',function(){
+ var el=document.getElementById('jm');if(!el)return;
+ if(!window.maplibregl){el.parentNode.querySelector('.jplay').style.display='none';el.innerHTML='<p class="jfb">The interactive map could not load. See the day-by-day itinerary above.</p>';return;}
+ var P={mia:[-80.287,25.795],lim:[-77.03,-12.122],iqt:[-73.253,-3.749],irapay:[-73.245,-3.700],sanandres:[-73.225,-3.680],monos:[-73.15,-3.635],nvida:[-73.27,-3.715],momon:[-73.235,-3.69]};
+ var S=[
+ {k:'mia',d:'Dec 12',t:'Miami (MIA) to Lima',p:'The journey begins: the flight south from Miami to Lima. International flights to Lima are not included.',i:'skyline.jpg',z:3},
+ {k:'lim',d:'Dec 12–13',t:'Lima, Belmond Miraflores Park',p:'Arrive in Lima and settle in on the oceanfront Malecón. Welcome dinner, then Barranco, the historic center and Peru\'s celebrated cuisine.',i:'malecon.jpg',z:11},
+ {k:'iqt',d:'Dec 14',t:'Into the Amazon',p:'Morning flight to Iquitos (private charter proposed), then by boat to Irapay Amazon Lodge on the Momón River at Padre Cocha, our operations base. Sunset on the river.',i:'sunset.jpg',z:10,f:'lim'},
+ {k:'sanandres',d:'Dec 15',t:'San Andrés Bora community',p:'Christmas morning, gift giving with Pepe: traditional dances in the maloca, time with the children and their families.',i:'hero.jpg',z:12.5,f:'irapay'},
+ {k:'monos',d:'Dec 16',t:'Monkey Island, Padre Cocha & Nueva Vida',p:'Morning at La Isla de los Monos. Afternoon deliveries in Padre Cocha and the Yagua community of Nueva Vida.',i:'monkeys.jpg',z:11.5},
+ {k:'momon',d:'Dec 17',t:'Momón villages, pink dolphins & Christmas dinner',p:'More villages along the Momón, pink river dolphins, and a Christmas celebration dinner at the lodge.',i:'dolphin.jpg',z:12},
+ {k:'lim',d:'Dec 18',t:'Return to Lima',p:'A final Amazon morning, then the flight back to Lima and Belmond Miraflores Park. Proposed: a private table at Central or Maido, and a rooftop pisco masterclass above the Costa Verde.',i:'central-kitchen.jpg',z:11,f:'iqt'},
+ {k:'lim',d:'Dec 19',t:'Free day & the Million Night',p:'Your day, at your pace. Optional: a helicopter flight over the cliffs of Miraflores, or a day escape to Paracas. By evening, the farewell gala: two special guests, to be announced, and a live pledge moment toward $1,000,000.',i:'pacific-sunset.jpg',z:11.5},
+ {k:'mia',d:'Dec 20',t:'Fly home: Lima to Miami',p:'Return home with a story to tell, and a reason to keep going.',i:'barranco.jpg',z:3,f:'lim'}];
+ function arc(a,b){var o=[],n=64,dx=b[0]-a[0],dy=b[1]-a[1],L=Math.sqrt(dx*dx+dy*dy),h=L*.18;for(var i=0;i<=n;i++){var t=i/n,x=a[0]+dx*t,y=a[1]+dy*t,s=Math.sin(Math.PI*t)*h;o.push([x-dy/L*s,y+dx/L*s]);}return o;}
+ var flights=[arc(P.mia,P.lim),arc(P.lim,P.iqt),arc(P.iqt,P.lim),arc(P.lim,P.mia).map(function(c){return[c[0]+.6,c[1]]})];
+ var river=[P.iqt,[-73.24,-3.725],P.irapay,P.momon,P.sanandres,[-73.19,-3.66],P.monos,[-73.2,-3.69],P.nvida,P.irapay];
+ var map=new maplibregl.Map({container:el,style:'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json',center:[-77,6],zoom:2.2,pitch:30,attributionControl:{compact:true},cooperativeGestures:true});
+ map.addControl(new maplibregl.NavigationControl({showCompass:false}),'top-left');
+ var mk={};
+ map.on('style.load',function(){try{map.setProjection({type:'globe'});}catch(e){}});
+ map.on('load',function(){
+  map.addSource('fl',{type:'geojson',data:{type:'FeatureCollection',features:flights.map(function(c){return{type:'Feature',geometry:{type:'LineString',coordinates:c}}})}});
+  map.addSource('rv',{type:'geojson',data:{type:'Feature',geometry:{type:'LineString',coordinates:river}}});
+  map.addLayer({id:'flg',type:'line',source:'fl',paint:{'line-color':'#ecd096','line-width':8,'line-blur':8,'line-opacity':.35}});
+  map.addLayer({id:'fll',type:'line',source:'fl',paint:{'line-color':'#ecd096','line-width':1.6,'line-dasharray':[0,4,3]}});
+  map.addLayer({id:'rvg',type:'line',source:'rv',paint:{'line-color':'#5fd3ff','line-width':10,'line-blur':8,'line-opacity':.35}});
+  map.addLayer({id:'rvl',type:'line',source:'rv',paint:{'line-color':'#8be3ff','line-width':2,'line-dasharray':[0,4,3]}});
+  var steps=[[0,4,3],[0.5,4,2.5],[1,4,2],[1.5,4,1.5],[2,4,1],[2.5,4,.5],[3,4,0],[0,.5,3,3.5],[0,1,3,3],[0,1.5,3,2.5],[0,2,3,2],[0,2.5,3,1.5],[0,3,3,1],[0,3.5,3,.5]],st=0;
+  setInterval(function(){st=(st+1)%steps.length;try{map.setPaintProperty('fll','line-dasharray',steps[st]);map.setPaintProperty('rvl','line-dasharray',steps[st]);}catch(e){}},70);
+  ['mia','lim','iqt','irapay','sanandres','monos','nvida'].forEach(function(k){var d=document.createElement('div');d.className='jmk';mk[k]=d;
+   d.addEventListener('click',function(){for(var i=0;i<S.length;i++)if(S[i].k==k||(k=='irapay'&&i==2)||(k=='nvida'&&i==4)){go(i);break;}});
+   new maplibregl.Marker({element:d}).setLngLat(P[k]).addTo(map);});
+ });
+ var tl=document.getElementById('jtl'),btn=[];
+ S.forEach(function(s,i){var b=document.createElement('button');b.type='button';b.innerHTML='<b>'+s.d+'</b>'+s.t.split(':')[0];b.onclick=function(){stop();go(i)};tl.appendChild(b);btn.push(b);});
+ var card=document.getElementById('jcard');
+ function go(i){var s=S[i];btn.forEach(function(b,j){b.classList.toggle('on',i==j)});btn[i].scrollIntoView({block:'nearest',inline:'center',behavior:'smooth'});
+  Object.keys(mk).forEach(function(k){mk[k].classList.toggle('on',k==s.k)});
+  card.hidden=false;card.style.animation='none';card.offsetHeight;card.style.animation='';
+  document.getElementById('jci').style.backgroundImage='url(assets/img/'+s.i+')';
+  document.getElementById('jcd').textContent=s.d;document.getElementById('jch').textContent=s.t;document.getElementById('jcp').textContent=s.p;
+  var mob=window.innerWidth<700;map.flyTo({center:P[s.k],zoom:s.z-(mob?.7:0),pitch:s.z>8?55:25,bearing:s.z>8?-20:0,speed:.9,curve:1.6,offset:mob?[0,-90]:[120,-40],essential:true});}
+ var timer=null,cur=-1,pb=document.getElementById('jplay');
+ function stop(){if(timer){clearInterval(timer);timer=null;pb.innerHTML='&#9654; Fly the journey';}}
+ pb.onclick=function(){if(timer){stop();return;}pb.innerHTML='&#10074;&#10074; Pause';cur=(cur+1)%S.length;go(cur);timer=setInterval(function(){cur++;if(cur>=S.length){stop();cur=-1;return;}go(cur)},5200);};
+ btn.forEach(function(b,i){b.addEventListener('click',function(){cur=i})});
+});
+</script>
+
+
 <section id="signature"><div class="wrap">
  <div class="eyebrow">Signature experiences</div><h2>Fifteen moments <span class="gt">that change you</span></h2><div class="rule"></div>
  <span class="tag">Proposed, to be refined</span>
